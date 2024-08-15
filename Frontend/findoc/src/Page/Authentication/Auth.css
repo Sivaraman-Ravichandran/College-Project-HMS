@@ -1,0 +1,118 @@
+/* Wrapper to center the container */
+.user-auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    background-color: #ffffff; /* Light background for contrast */
+    padding: 20px;
+  }
+  
+  /* Main container for the authentication section */
+  .user-auth-container {
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .user-auth-image-section {
+    flex: 1;
+    background-image: url('../../assets/Hospital.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px 0 0 8px;
+    display: none;
+  }
+  
+  @media (min-width: 768px) {
+    .user-auth-image-section {
+      display: block;
+    }
+  }
+  
+  .user-auth-form-section {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .user-auth-form-container {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .user-auth-title {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .user-auth-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .user-auth-input-group {
+    margin-bottom: 20px;
+  }
+  
+  .user-auth-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .user-auth-input:focus {
+    border-color: #131523;
+    outline: none;
+    box-shadow: 0 0 5px #5c69fb;
+  }
+  
+  .user-auth-submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #5c69fb;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .user-auth-submit-button:hover {
+    background-color: #131523;
+  }
+  
+  .user-auth-toggle-button {
+    background: none;
+    border: none;
+    color: #5c69fb;
+    cursor: pointer;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .user-auth-toggle-button:hover {
+    text-decoration: underline;
+  }
+  
+  .user-auth-error {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: -16px;
+    margin-bottom: 16px;
+  }
+  

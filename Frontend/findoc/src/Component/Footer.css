@@ -1,0 +1,48 @@
+.about-us {
+    display: flex;
+    justify-content: space-around;
+    background-color: #0a0a23;
+    color: #fff;
+    padding: 20px;
+}
+
+.about-us__section {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.about-us__section h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.about-us__section p, 
+.about-us__section ul {
+    margin: 5px 0;
+}
+
+.about-us__section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-us__section ul li::before {
+    content: '• ';
+    color: red;
+    margin-right: 5px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+    font-size: 1.5em;
+}
+
+.social-icons svg {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.social-icons svg:hover {
+    color: #007bff;
+}

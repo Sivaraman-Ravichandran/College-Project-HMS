@@ -1,0 +1,54 @@
+.doctor-list-container {
+    padding: 20px;
+  }
+  
+  .doctor-list-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .doctor-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .doctor-table th,
+  .doctor-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .doctor-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .doctor-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .doctor-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .action-btn {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+  }
+  
+  .edit-btn {
+    background-color: #4CAF50; /* Green */
+  }
+  
+  .delete-btn {
+    background-color: #f44336; /* Red */
+  }
+  
+  .view-btn {
+    background-color: #008CBA; /* Blue */
+  }
+  

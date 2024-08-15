@@ -1,0 +1,50 @@
+/* Styles for the loading message */
+.loading-message {
+    display: none;
+    color: blue;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .loading-message.show {
+    display: block;
+  }
+  
+  /* Styles for the success message */
+  .success-message {
+    display: none;
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .success-message.show {
+    display: block;
+  }
+  
+  /* Styles for the error message */
+  .error-message {
+    display: none;
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .error-message.show {
+    display: block;
+  }
+  
+  /* Button styles */
+  .btn_submit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .btn_submit:hover {
+    background-color: #0056b3;
+  }
+  

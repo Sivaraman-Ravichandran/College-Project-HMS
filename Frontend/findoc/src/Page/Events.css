@@ -1,0 +1,38 @@
+.events-page {
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: #333;
+  text-align: center;
+}
+
+.events-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.news-slideshow {
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .events-page {
+      padding: 20px;
+  }
+
+  h1 {
+      font-size: 1.75rem;
+  }
+
+  .events-list {
+      flex-direction: column;
+      align-items: center;
+  }
+}
