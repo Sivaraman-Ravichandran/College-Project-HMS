@@ -5,6 +5,10 @@ import DoctorProfile from "../Component/DoctorProfile";
 import ContactForm from "../Component/ContactForm";
 import NavBar from "./NavBar";
 import "./HospitalDetail.css";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
 
 const HospitalDetail = () => {
   const { id } = useParams();
@@ -88,9 +92,34 @@ const HospitalDetail = () => {
             </div>
           </div>
         </div>
-        <div className="about">
-          <h1>About the hospital</h1>
-          <p>{hospital.about}</p>
+        <div className="about-frame">
+          <div className="about">
+            <h1>Welcome to {hospital.name}</h1>
+            <p>{hospital.about}</p>
+          </div>
+          <div className="services">
+            <h2>Services</h2>
+            <List
+              sx={{
+                width: "100%",
+                maxWidth: 360,
+                bgcolor: "background.paper",
+                position: "relative",
+                overflow: "auto",
+                maxHeight: 300,
+                "& ul": { padding: 0 },
+              }}
+              subheader={<li />}
+            >
+              {hospital.services.map((service, index) => (
+                <li key={`section-${index}`}>
+                  <ul>
+                    <ListSubheader>{`${service}`}</ListSubheader>
+                  </ul>
+                </li>
+              ))}
+            </List>
+          </div>
         </div>
         <div>
           <h1 style={{ textAlign: "center" }}>Doctors</h1>
@@ -99,26 +128,6 @@ const HospitalDetail = () => {
               <DoctorProfile key={index} details={doctor} />
             ))}
           </div>
-        </div>
-        <div className="services">
-          <h2>Services</h2>
-          <ul>
-            {hospital.services.map((service, index) => (
-              <li key={index}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-check-circle-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                </svg>
-                {service}
-              </li>
-            ))}
-          </ul>
         </div>
         <div className="news-events-container">
           <div className="news">

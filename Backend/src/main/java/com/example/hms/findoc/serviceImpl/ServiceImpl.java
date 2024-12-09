@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.example.hms.findoc.dto.AuthenticationDTO;
@@ -18,56 +20,55 @@ import com.example.hms.findoc.entity.SpecialityCard;
 import com.example.hms.findoc.entity.User;
 import com.example.hms.findoc.repository.*;
 import com.example.hms.findoc.service.*;
+
 @Service
-public class ServiceImpl implements service{
-@Autowired
-UserRepository UserRepo;
-@Autowired
-DoctorCardRepo doctorCardRepo;
-@Autowired
-DoctorDetailRepo doctorDetailRepo;
-@Autowired
-HospitalCardRepo hospitalCardRepo;
-@Autowired
-HospitalDetailRepo hospitalDetailrepo;
-@Autowired
-SpecialityCardRepo specialityCardRepo;
-@Autowired
-private EventsRepository eventsRepository;
-@Autowired
-private NewsDetailsRepository newsRepository;
+public class ServiceImpl implements service {
+	@Autowired
+	UserRepository UserRepo;
+	@Autowired
+	DoctorCardRepo doctorCardRepo;
+	@Autowired
+	DoctorDetailRepo doctorDetailRepo;
+	@Autowired
+	HospitalCardRepo hospitalCardRepo;
+	@Autowired
+	HospitalDetailRepo hospitalDetailrepo;
+	@Autowired
+	SpecialityCardRepo specialityCardRepo;
+	@Autowired
+	private EventsRepository eventsRepository;
+	@Autowired
+	private NewsDetailsRepository newsRepository;
 
 	@Override
 	public List<User> getAllDetails() {
-		return UserRepo.findAll() ;
+		return UserRepo.findAll();
 	}
-	 @Override
-	    public String postAllDetails(AuthenticationDTO auth) {
-	        String id = auth.getId();
-	        if (id == null || id.isEmpty()) {
-	            id = UUID.randomUUID().toString();
-	        }
 
-	        User user = new User(
-	                id,
-	                auth.getEmail(),
-	                auth.getPassword()
-	        );
-	        UserRepo.save(user);
-	        return user.getEmail();
-	    }
+	@Override
+	public String postAllDetails(AuthenticationDTO auth) {
+		String id = auth.getId();
+		if (id == null || id.isEmpty()) {
+			id = UUID.randomUUID().toString();
+		}
 
+		User user = new User(
+				id,
+				auth.getEmail(),
+				auth.getPassword());
+		UserRepo.save(user);
+		return user.getEmail();
+	}
 
 	@Override
 	public User findByEmail(String mail) {
 		return UserRepo.findByEmail(mail);
 	}
 
-
 	@Override
 	public List<DoctorCard> getAllDoctorCard() {
 		return doctorCardRepo.findAll();
-	
+
 	}
 
 	@Override
@@ -154,31 +155,66 @@ private NewsDetailsRepository newsRepository;
 	public Optional<SpecialityCard> SpecialityById(int n) {
 		return specialityCardRepo.findById(n);
 	}
+
 	@Override
-	 public List<EventsDetails> getAllEvents() {
-	        return eventsRepository.findAll();
-	    }
+	public List<EventsDetails> getAllEvents() {
+		return eventsRepository.findAll();
+	}
+
 	@Override
-	    public EventsDetails getEventById(int id) {
-	        return eventsRepository.findById(id).orElse(null);
-	    }
+	public EventsDetails getEventById(int id) {
+		return eventsRepository.findById(id).orElse(null);
+	}
+
 	@Override
-	    public EventsDetails createEvent(EventsDetails eventDetails) {
-	        return eventsRepository.save(eventDetails);
-	    }
+	public EventsDetails createEvent(EventsDetails eventDetails) {
+		return eventsRepository.save(eventDetails);
+	}
 
 	@Override
 	public List<NewsDetails> getAllNews() {
-		   return newsRepository.findAll();
+		return newsRepository.findAll();
 	}
 
 	@Override
 	public NewsDetails getNewsById(int id) {
-		  return newsRepository.findById(id).orElse(null);
+		return newsRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public NewsDetails createNews(NewsDetails newsDetails) {
 		return newsRepository.save(newsDetails);
+	}
+
+	@Autowired
+	private JavaMailSender mailSender;
+
+	public String createUser(User userCredential) {
+		// Set a default password
+		String defaultPassword = "default123";
+		userCredential.setPassword(defaultPassword);
+
+		// Save to the database
+		UserRepo.save(userCredential);
+		// doctorDetailRepo.save(userCredential);
+		DoctorDetails dt = new DoctorDetails();
+		dt.setDname(userCredential.getName());
+		dt.setId(userCredential.getId());
+		// Send Email Notification
+		doctorDetailRepo.save(dt);
+		sendAccountCreationEmail(userCredential.getEmail(), defaultPassword);
+
+		return "User created successfully!";
+	}
+
+	private void sendAccountCreationEmail(String email, String password) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(email);
+		message.setSubject("Account Created Successfully");
+		message.setText("Dear user,\n\nYour account has been created successfully.\n\nEmail: "
+				+ email + "\nPassword: " + password
+				+ "\n\nPlease change your password upon first login.");
+
+		mailSender.send(message);
 	}
 }

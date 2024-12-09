@@ -31,12 +31,9 @@
 }
 
 .services {
-  background-color: #f8f9fa;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 0 auto;
+ 
 }
 
 .services h2 {
@@ -308,6 +305,17 @@
   color: #555;
   background-color: #f9f9f9;
   animation: fadeIn 1.5s infinite;
+}
+.about h1 {
+  font-size: 40px;
+  font-family: "Constantia";
+}
+.about p {
+  font-family: "proxima_nova_rgregular";
+  font-size: 20px;
+}
+.about-frame{
+  display: flex;
 }
 
 @keyframes fadeIn {

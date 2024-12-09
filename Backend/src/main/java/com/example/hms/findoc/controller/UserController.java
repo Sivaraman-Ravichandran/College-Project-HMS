@@ -33,4 +33,8 @@ public class UserController {
 			return new ResponseEntity<>("Invalid Username or Password", HttpStatus.UNAUTHORIZED);
 		}
 	}
+	@PostMapping("/create")
+	public String createUser(@RequestBody User user){
+		return service.createUser(user);
+	}
 }

@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "DoctorDetail")
 public class DoctorDetails {
     @Id
-    private int id;
+    private String id;
     private String Bimg;
-    private  String Dimg;
+    private String Dimg;
     private String Dname;
     private String Speciality;
     private String Location;
@@ -27,11 +27,11 @@ public class DoctorDetails {
     private String Rdate;
     private String Rdesc;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

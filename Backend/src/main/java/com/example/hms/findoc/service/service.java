@@ -56,4 +56,6 @@ public interface service {
 	NewsDetails getNewsById(int id);
 
 	NewsDetails createNews(NewsDetails newsDetails);
+
+    String createUser(User user);
 }
