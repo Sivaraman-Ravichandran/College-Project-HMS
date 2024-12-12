@@ -57,14 +57,20 @@ const UserAuth = ({ setIsAuthenticated }) => {
             password: form.password,
           });
 
-          console.log(response.data);
+          const { id, role, message } = response.data;
+          console.log(message);
           localStorage.setItem("isAuthenticated", "true");
-          if (form.email.endsWith("@gmail.com")) {
+          localStorage.setItem("userRole", role);
+
+          // Navigate based on role
+          if (role === "doctor") {
+            navigate(`/dashboard-doctor/${id}`);
+          } else if (role === "general") {
             navigate("/home");
-          } else if (form.email.endsWith("@admin.com")||(form.email.endsWith("@skcet.ac.in"))) {
-            navigate("/dashboard");
+          } else if (role === "hospital") {
+            navigate("/dashboard-hospital");
           } else {
-            alert("Unauthorized email domain");
+            alert("Unauthorized role");
           }
         }
       } catch (error) {

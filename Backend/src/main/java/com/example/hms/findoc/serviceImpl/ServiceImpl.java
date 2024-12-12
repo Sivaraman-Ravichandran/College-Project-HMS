@@ -56,6 +56,7 @@ public class ServiceImpl implements service {
 				id,
 				auth.getEmail(),
 				auth.getPassword());
+		user.setRole("general");
 		UserRepo.save(user);
 		return user.getEmail();
 	}
@@ -104,7 +105,7 @@ public class ServiceImpl implements service {
 	}
 
 	@Override
-	public Optional<DoctorDetails> getById(int n) {
+	public Optional<DoctorDetails> getById(String n) {
 		// TODO Auto-generated method stub
 		return doctorDetailRepo.findById(n);
 	}
@@ -191,9 +192,9 @@ public class ServiceImpl implements service {
 
 	public String createUser(User userCredential) {
 		// Set a default password
-		String defaultPassword = "default123";
+		String defaultPassword = "doctor123";
 		userCredential.setPassword(defaultPassword);
-
+		userCredential.setRole("doctor");
 		// Save to the database
 		UserRepo.save(userCredential);
 		// doctorDetailRepo.save(userCredential);

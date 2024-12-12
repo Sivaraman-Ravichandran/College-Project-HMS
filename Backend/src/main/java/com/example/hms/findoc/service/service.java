@@ -25,7 +25,7 @@ public interface service {
 
 	void postDetailDoctor(DoctorDetails d);
 
-	Optional<DoctorDetails> getById(int n);
+	Optional<DoctorDetails> getById(String n);
 
 	List<HospitalCard> findHospitalCard();
 

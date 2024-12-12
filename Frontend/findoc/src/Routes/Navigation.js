@@ -13,8 +13,9 @@ import DoctorDetail from "../Page/DoctorDetail";
 import LandingPage from "../Page/Landingpage/LandingPage";
 import DoctorPage from "../Page/DoctorPage";
 import Dashboard from "../Page/Admin/DashBoard";
+import DoctorDashboard from "../Page/Admin/Doctor-Dashboard/DoctorDashboard";
+import DoctorProfile from "../Component/DoctorProfile";
 function Navigation() {
-  
   return (
     <BrowserRouter>
       <Routes>
@@ -31,6 +32,8 @@ function Navigation() {
         <Route path="/doctor/:id" element={<DoctorDetail />} />
         <Route path="/special/:id" element={<DoctorPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard-doctor/:id" element={<DoctorDashboard />} />
+        <Route path="/doctorProfile" element={<DoctorProfile />} />
       </Routes>
     </BrowserRouter>
   );

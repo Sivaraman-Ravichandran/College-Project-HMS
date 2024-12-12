@@ -13,6 +13,7 @@ public class User {
     private String name;
     private String phone;
     private String password;
+    private String role;
 
     // Constructors
     public User() {
@@ -31,6 +32,14 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getEmail() {

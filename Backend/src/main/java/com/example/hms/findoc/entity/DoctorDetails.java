@@ -7,26 +7,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class DoctorDetails {
     @Id
     private String id;
-    private String Bimg;
-    private String Dimg;
-    private String Dname;
-    private String Speciality;
-    private String Location;
-    private String About;
-    private String Status;
-    private String Fees;
-    private String Actions[];
-    private String Duties[];
-    private String Eimg;
-    private String Ehname;
-    private String Erole;
-    private String Eduration;
-    private String Elocation;
-    private String Rimg;
-    private String Rname;
-    private String Rdate;
-    private String Rdesc;
+    private String bimg;
+    private String dimg;
+    private String dname;
+    private String speciality;
+    private String location;
+    private String about;
+    private String status;
+    private String fees;
+    private String[] actions;
+    private Duties[] duties;
+    private String eimg;
+    private String ehname;
+    private String erole;
+    private String eduration;
+    private String elocation;
+    private String rimg;
+    private String rname;
+    private String rdate;
+    private String rdesc;
 
+    // Getters and setters for all fields
     public String getId() {
         return id;
     }
@@ -36,154 +37,154 @@ public class DoctorDetails {
     }
 
     public String getBimg() {
-        return Bimg;
+        return bimg;
     }
 
     public void setBimg(String bimg) {
-        Bimg = bimg;
+        this.bimg = bimg;
     }
 
     public String getDimg() {
-        return Dimg;
+        return dimg;
     }
 
     public void setDimg(String dimg) {
-        Dimg = dimg;
+        this.dimg = dimg;
     }
 
     public String getDname() {
-        return Dname;
+        return dname;
     }
 
     public void setDname(String dname) {
-        Dname = dname;
+        this.dname = dname;
     }
 
     public String getSpeciality() {
-        return Speciality;
+        return speciality;
     }
 
     public void setSpeciality(String speciality) {
-        Speciality = speciality;
+        this.speciality = speciality;
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
     public void setLocation(String location) {
-        Location = location;
+        this.location = location;
     }
 
     public String getAbout() {
-        return About;
+        return about;
     }
 
     public void setAbout(String about) {
-        About = about;
+        this.about = about;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public String getFees() {
-        return Fees;
+        return fees;
     }
 
     public void setFees(String fees) {
-        Fees = fees;
+        this.fees = fees;
     }
 
     public String[] getActions() {
-        return Actions;
+        return actions;
     }
 
     public void setActions(String[] actions) {
-        Actions = actions;
+        this.actions = actions;
     }
 
-    public String[] getDuties() {
-        return Duties;
+    public Duties[] getDuties() {
+        return duties;
     }
 
-    public void setDuties(String[] duties) {
-        Duties = duties;
+    public void setDuties(Duties[] duties) {
+        this.duties = duties;
     }
 
     public String getEimg() {
-        return Eimg;
+        return eimg;
     }
 
     public void setEimg(String eimg) {
-        Eimg = eimg;
+        this.eimg = eimg;
     }
 
     public String getEhname() {
-        return Ehname;
+        return ehname;
     }
 
     public void setEhname(String ehname) {
-        Ehname = ehname;
+        this.ehname = ehname;
     }
 
     public String getErole() {
-        return Erole;
+        return erole;
     }
 
     public void setErole(String erole) {
-        Erole = erole;
+        this.erole = erole;
     }
 
     public String getEduration() {
-        return Eduration;
+        return eduration;
     }
 
     public void setEduration(String eduration) {
-        Eduration = eduration;
+        this.eduration = eduration;
     }
 
     public String getElocation() {
-        return Elocation;
+        return elocation;
     }
 
     public void setElocation(String elocation) {
-        Elocation = elocation;
+        this.elocation = elocation;
     }
 
     public String getRimg() {
-        return Rimg;
+        return rimg;
     }
 
     public void setRimg(String rimg) {
-        Rimg = rimg;
+        this.rimg = rimg;
     }
 
     public String getRname() {
-        return Rname;
+        return rname;
     }
 
     public void setRname(String rname) {
-        Rname = rname;
+        this.rname = rname;
     }
 
     public String getRdate() {
-        return Rdate;
+        return rdate;
     }
 
     public void setRdate(String rdate) {
-        Rdate = rdate;
+        this.rdate = rdate;
     }
 
     public String getRdesc() {
-        return Rdesc;
+        return rdesc;
     }
 
     public void setRdesc(String rdesc) {
-        Rdesc = rdesc;
+        this.rdesc = rdesc;
     }
 }

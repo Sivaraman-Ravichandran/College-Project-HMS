@@ -1,97 +1,85 @@
-import React from 'react';
-import './DoctorList.css'; // Import the CSS file for styling
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 
 const DoctorList = () => {
-  // Mock data for doctors (replace this with actual data or API call)
-  const doctors = [
-    {
-      id: '#0008',
-      name: 'Allan Stuart',
-      designation: 'Oncologist',
-      schedule: {
-        Sun: 'NA',
-        Mon: '9AM-2PM',
-        Tue: '9AM-2PM',
-        Wed: '9AM-2PM',
-        Thu: '9AM-2PM',
-        Fri: '9AM-2PM',
-        Sat: '9AM-2PM',
-      },
-      img: 'https://via.placeholder.com/40', // Replace with actual image path
-    },
-    {
-      id: '#0021',
-      name: 'Smith White',
-      designation: 'Neurology',
-      schedule: {
-        Sun: 'NA',
-        Mon: '3PM-5PM',
-        Tue: '3PM-5PM',
-        Wed: '3PM-5PM',
-        Thu: '3PM-5PM',
-        Fri: '3PM-5PM',
-        Sat: '3PM-5PM',
-      },
-      img: 'https://via.placeholder.com/40', // Replace with actual image path
-    },
-    // Add more doctors as needed
-  ];
+  const [allDoctors, setAllDoctors] = useState([]); // Full list of doctors
+  const [doctors, setDoctors] = useState([]); // Filtered list of doctors
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/doctorDetailGet")
+      .then((response) => {
+        setAllDoctors(response.data);
+        setDoctors(response.data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  const handleSearch = () => {
+    const filteredDoctors = allDoctors.filter((doctor) => {
+      const matchesLocation = doctor.location
+        ?.toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const matchesCategory = filterCategory
+        ? doctor.speciality?.toLowerCase() === filterCategory.toLowerCase()
+        : true;
+  
+      return matchesLocation && matchesCategory;
+    });
+    setDoctors(filteredDoctors);
+  };
+  
 
   return (
-    <div className="doctor-list-container">
-      <h2>Doctors List</h2>
-      <div className="table-controls">
-        <select className="records-per-page">
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-        <span>Records Per Page</span>
-        <input type="text" className="search-bar" placeholder="Search..." />
-        <button className="add-doctor-button">Add Doctor</button>
-      </div>
-      <table className="doctor-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Doctor Name</th>
-            <th>Designation</th>
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {doctors.map((doctor) => (
-            <tr key={doctor.id}>
-              <td>{doctor.id}</td>
-              <td>
-                <img src={doctor.img} alt={doctor.name} className="doctor-img" />
-                {doctor.name}
-              </td>
-              <td>{doctor.designation}</td>
-              <td className={doctor.schedule.Sun === 'NA' ? 'na' : ''}>{doctor.schedule.Sun}</td>
-              <td className={doctor.schedule.Mon === 'NA' ? 'na' : ''}>{doctor.schedule.Mon}</td>
-              <td className={doctor.schedule.Tue === 'NA' ? 'na' : ''}>{doctor.schedule.Tue}</td>
-              <td className={doctor.schedule.Wed === 'NA' ? 'na' : ''}>{doctor.schedule.Wed}</td>
-              <td className={doctor.schedule.Thu === 'NA' ? 'na' : ''}>{doctor.schedule.Thu}</td>
-              <td className={doctor.schedule.Fri === 'NA' ? 'na' : ''}>{doctor.schedule.Fri}</td>
-              <td className={doctor.schedule.Sat === 'NA' ? 'na' : ''}>{doctor.schedule.Sat}</td>
-              <td>
-                <button className="action-button edit">✏️</button>
-                <button className="action-button delete">🗑️</button>
-                <button className="action-button view">👁️</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Container>
+      <h1 className="mt-4">Find Your Doctor</h1>
+      <Row className="my-3">
+        <Col md={4}>
+          <Form.Control
+            type="text"
+            placeholder="Search by location"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </Col>
+        <Col md={4}>
+          <Form.Select
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value)}
+          >
+            <option value="">All Specialities</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="ENT">ENT</option>
+            <option value="Cardiology">Cardiology</option>
+          </Form.Select>
+        </Col>
+        <Col md={4}>
+          <Button onClick={handleSearch}>Search</Button>
+        </Col>
+      </Row>
+      <Row>
+        {doctors.map((doctor) => (
+          <Col md={4} key={doctor.id} className="mb-4">
+            <Card>
+              <Card.Img variant="top" src={doctor.dimg} />
+              <Card.Body>
+                <Card.Title>{doctor.dname}</Card.Title>
+                <Card.Text>
+                  <strong>Speciality:</strong> {doctor.speciality}
+                  <br />
+                  <strong>Location:</strong> {doctor.location}
+                  <br />
+                  <strong>Fees:</strong> {doctor.fees}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 
