@@ -9,4 +9,3 @@ public class FindocApplication {
 		SpringApplication.run(FindocApplication.class, args);
 	}
 }
- 

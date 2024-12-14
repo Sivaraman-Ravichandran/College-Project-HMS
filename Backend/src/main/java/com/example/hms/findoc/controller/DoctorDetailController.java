@@ -58,43 +58,54 @@ public class DoctorDetailController {
     public ResponseEntity<String> updateDoctor(
             @PathVariable String id,
             @RequestParam("doctorData") String doctorData,
-            @RequestParam(value = "dimg", required = false) MultipartFile dimg) {
+            @RequestParam(value = "dimg", required = false) MultipartFile dimg,
+            @RequestParam(value = "bimg", required = false) MultipartFile bimg) {
         try {
             // Parse the JSON data for doctor details
             ObjectMapper objectMapper = new ObjectMapper();
             DoctorDetails updatedDoctor = objectMapper.readValue(doctorData, DoctorDetails.class);
-
+    
             // Find existing doctor by ID
             Optional<DoctorDetails> existingDoctor = doctorRepository.findById(id);
             if (existingDoctor.isPresent()) {
                 // Update fields of the doctor
                 updatedDoctor.setId(id);
-
-                // Handle image upload if a file is provided
+    
+                // Handle profile image upload (dimg)
                 if (dimg != null && !dimg.isEmpty()) {
-                    String base64Image = encodeImageToBase64(dimg);
-                    updatedDoctor.setDimg(base64Image); // Store the Base64-encoded image
+                    String base64Dimg = encodeImageToBase64(dimg);
+                    updatedDoctor.setDimg(base64Dimg); // Store the Base64-encoded profile image
                 } else {
-                    // Retain the existing image if no new image is uploaded
+                    // Retain the existing profile image if no new image is uploaded
                     updatedDoctor.setDimg(existingDoctor.get().getDimg());
                 }
-
+    
+                // Handle banner image upload (bimg)
+                if (bimg != null && !bimg.isEmpty()) {
+                    String base64Bimg = encodeImageToBase64(bimg);
+                    updatedDoctor.setBimg(base64Bimg); // Store the Base64-encoded banner image
+                } else {
+                    // Retain the existing banner image if no new image is uploaded
+                    updatedDoctor.setBimg(existingDoctor.get().getBimg());
+                }
+    
                 // Save updated doctor details
                 doctorRepository.save(updatedDoctor);
-
+    
                 return ResponseEntity.ok("Doctor details updated successfully!");
             }
-
+    
             return ResponseEntity.notFound().build();
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error updating doctor details.");
         }
     }
-
+    
     // Helper method to encode the uploaded image to Base64 format
     private String encodeImageToBase64(MultipartFile file) throws IOException {
         byte[] fileBytes = file.getBytes();
         return Base64.getEncoder().encodeToString(fileBytes);
     }
+    
 }

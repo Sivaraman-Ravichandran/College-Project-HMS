@@ -7,6 +7,7 @@ const DoctorList = () => {
   const [doctors, setDoctors] = useState([]); // Filtered list of doctors
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     axios
@@ -26,13 +27,14 @@ const DoctorList = () => {
       const matchesCategory = filterCategory
         ? doctor.speciality?.toLowerCase() === filterCategory.toLowerCase()
         : true;
-  
+
       return matchesLocation && matchesCategory;
     });
     setDoctors(filteredDoctors);
   };
-  
-
+  const handleNullValue = (value) => {
+    return value ? value : "Not Provided";
+  };
   return (
     <Container>
       <h1 className="mt-4">Find Your Doctor</h1>
@@ -64,7 +66,14 @@ const DoctorList = () => {
         {doctors.map((doctor) => (
           <Col md={4} key={doctor.id} className="mb-4">
             <Card>
-              <Card.Img variant="top" src={doctor.dimg} />
+              <Card.Img
+                variant="top"
+                src={
+                  selectedImage
+                    ? URL.createObjectURL(selectedImage)
+                    : `data:image/jpeg;base64,${handleNullValue(doctor.dimg)}`
+                }
+              />
               <Card.Body>
                 <Card.Title>{doctor.dname}</Card.Title>
                 <Card.Text>
